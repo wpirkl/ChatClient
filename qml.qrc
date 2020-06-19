@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>chat.qml</file>
+        <file>chatclient_de.qm</file>
+        <file>chatclient_en.qm</file>
+        <file>chatclient_fr.qm</file>
+    </qresource>
+</RCC>
