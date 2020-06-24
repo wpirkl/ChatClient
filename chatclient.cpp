@@ -55,7 +55,7 @@ void ChatClient::_onConnect()
 
 void ChatClient::onSendText(const QString & text)
 {
-    qDebug() << "ChatClient::onSendText(" << text << ")";
+    qDebug() << "ChatClient::onSendText(" << text << "@" << &text << ")";
 
     ds << QString("%1: %2").arg(userName, text);
 }
@@ -88,6 +88,15 @@ void ChatClient::onError(QAbstractSocket::SocketError errorCode)
     qDebug() << "ChatClient::onError(" << errorCode << ")";
 
     emit error(QString(errorCode));
+
+    deleteLater();
+}
+
+void ChatClient::_onDisconnect()
+{
+    qDebug() << "ChatClient::_onDisconnect()";
+
+    emit disconnected();
 
     deleteLater();
 }

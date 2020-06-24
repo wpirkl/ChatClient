@@ -50,9 +50,9 @@ int main(int argc, char *argv[])
 
     // connect the 'connect' signal to the chat manager 'onConnect' slot
     QObject::connect(&uiManager,
-                     SIGNAL(connect(const QString &, const QString &, const bool)),
+                     SIGNAL(_connect(const QString &, const QString &, const bool)),
                      &chatManager,
-                     SLOT(onConnect(const QString &, const QString &, const bool)));
+                     SLOT(_onConnect(const QString &, const QString &, const bool)));
 
     // connect the 'connect' signal to the chat manager 'onConnect' slot
     QObject::connect(&uiManager,
@@ -62,9 +62,9 @@ int main(int argc, char *argv[])
 
     // connect the 'disconnect' signal to the chat manager 'onDisconnect' slot
     QObject::connect(&uiManager,
-                     SIGNAL(disconnect()),
+                     SIGNAL(_disconnect()),
                      &chatManager,
-                     SLOT(onDisconnect()));
+                     SIGNAL(_disconnect()));
 
     // connect the 'closing' signal to the chat manager 'onClosing' slot
     QObject::connect(&uiManager,

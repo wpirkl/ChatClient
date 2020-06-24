@@ -6,6 +6,7 @@ import QtQuick.Controls.Material 2.0
 
 
 Page {
+    id: page
     Connections{
         target: uiManager
 
@@ -33,7 +34,7 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            TextArea {
+            contentItem: TextArea {
                 id: chatHistory
 
                 readOnly: true
@@ -68,9 +69,27 @@ Page {
             onClicked: sendMessage()
         }
     }
+
+    Button {
+        id: disconnectButton
+        text: 'X'
+        anchors.top: parent.top
+        anchors.topMargin: 5
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        font.pointSize: 16
+        flat: true
+        onClicked: {
+            uiManager.onDisconnectClicked()
+        }
+    }
 }
 
+
+
+
+
 /*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
+    D{i:0;autoSize:true;height:480;width:640}D{i:7;anchors_x:4;anchors_y:2}
 }
  ##^##*/

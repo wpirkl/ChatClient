@@ -28,7 +28,7 @@ ChatManager::~ChatManager()
     qDebug() << "Chat Manager died!";
 }
 
-void ChatManager::onConnect(const QString & userName, const QString & serverName, bool isServer)
+void ChatManager::_onConnect(const QString & userName, const QString & serverName, bool isServer)
 {
     if(connecting) return;      // we're already trying to connect
 
@@ -39,6 +39,12 @@ void ChatManager::onConnect(const QString & userName, const QString & serverName
         try {
             // create a new chat server
             server = new ChatServer();
+
+            // connect the 'disconnect' signal so we can shut the server down
+            connect(this,
+                    SIGNAL(_disconnect()),
+                    server,
+                    SLOT(_onDisconnect()));
 
             // we want all of this happening in the server thread
             server->moveToThread(serverThread);
@@ -82,6 +88,11 @@ void ChatManager::onConnect(const QString & userName, const QString & serverName
             this,
             SLOT(onClientError(const QString &)));
 
+    connect(this,
+            SIGNAL(_disconnect()),
+            client,
+            SLOT(_onDisconnect()));
+
     // and let it execute within the client thread
     client->moveToThread(clientThread);
 
@@ -93,19 +104,6 @@ void ChatManager::onConnected()
     connecting = false;
 }
 
-void ChatManager::onDisconnect()
-{
-    if(server) {
-        delete server;
-    }
-
-    if(client) {
-        delete client;
-    }
-
-    server = nullptr;
-    client = nullptr;
-}
 
 void ChatManager::onSendClicked(const QString & text)
 {

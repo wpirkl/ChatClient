@@ -24,6 +24,12 @@ ChatServer::~ChatServer()
     connections.clear();
 }
 
+void ChatServer::_onDisconnect()
+{
+    // just delete ourself
+    deleteLater();
+}
+
 void ChatServer::incomingConnection(qintptr socketDescriptor)
 {
     qDebug() << "ChatServer::incomingConnection running in thread: " << QThread::currentThread()->objectName();
@@ -57,5 +63,6 @@ void ChatServer::incomingConnection(qintptr socketDescriptor)
 
 void ChatServer::onClientDisconnected(const ClientConnection* client)
 {
+    qDebug() << "ChatServer::onClientDisconnected running in thread: " << QThread::currentThread()->objectName();
     connections.removeAll(client);
 }

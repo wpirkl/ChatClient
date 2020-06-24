@@ -16,9 +16,9 @@ public:
     UIManager & operator=(UIManager const &) = delete;
 
 signals:
-    void connect(const QString & username, const QString & serverName, const bool isServer);
+    void _connect(const QString & username, const QString & serverName, const bool isServer);
 
-    void disconnect();
+    void _disconnect();
 
     void textReceived(const QString message);
 
@@ -35,6 +35,7 @@ signals:
 public slots:
     void onConnectToServerClicked(const QString & userName, const QString & serverName, const bool isServer);
     void onSendClicked(const QString & text);
+    void onDisconnectClicked();
 };
 
 #endif // UIMANAGER_H

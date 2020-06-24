@@ -44,7 +44,7 @@ void ClientConnection::onReadReady()
     // receive something
     ds >> str;
 
-    qDebug() << "ClientConnection::onReadReady running in thread: " << QThread::currentThread()->objectName() << " Message " << str;
+    qDebug() << "ClientConnection::onReadReady running in thread: " << QThread::currentThread()->objectName() << " Message " << str << " @" << &str;
 
     // emit it on receiveMessage so all other sockets receive it
     emit receiveMessage(str);
@@ -52,7 +52,7 @@ void ClientConnection::onReadReady()
 
 void ClientConnection::onSendMessage(const QString & message)
 {
-    qDebug() << "ClientConnection::onSendMessage running in thread: " << QThread::currentThread()->objectName() << " Message: " << message;
+    qDebug() << "ClientConnection::onSendMessage running in thread: " << QThread::currentThread()->objectName() << " Message: " << message << " @" << &message;
 
     // send the message over the socket
     ds << message;

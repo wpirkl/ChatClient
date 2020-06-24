@@ -34,12 +34,21 @@ void UIManager::onConnectToServerClicked(const QString & userName, const QString
     emit error("");
 
     // emit the connect signal to signal the chat manager 'we want to connect'
-    emit connect(userName, serverName, isServer);
+    emit _connect(userName, serverName, isServer);
 }
 
 void UIManager::onSendClicked(const QString & message)
 {
     if(message.isEmpty()) return;
 
+    qDebug() << "UIManager::onSendClicked("<< message << "@" << &message << ")";
+
     emit sendClicked(message);
+}
+
+void UIManager::onDisconnectClicked()
+{
+    qDebug() << "UIManager::onDisconnectClicked()";
+
+    emit _disconnect();
 }
